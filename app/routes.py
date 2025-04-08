@@ -1,18 +1,14 @@
-from flask import Blueprint, request, jsonify
-from .models import User
-from . import db
+from flask import jsonify, request
 
-main = Blueprint('main', __name__)
+Usuarios = [
+    {
+        'id': 1,
+        'Usuario': 'Teste',
+        'Senha': '123456'
+    }
+]
 
-
-@main.route('/api/login', methods=['POST'])
-def login():
-    dados = request.json
-    email = dados.get('email')
-    senha = dados.get('senha')
-
-    # Simulação de verificação futura no banco de dados
-    if email == "usuario@teste.com" and senha == "123456":
-        return jsonify({"status": "sucesso", "mensagem": "Login bem-sucedido"}), 200
-    else:
-        return jsonify({"status": "erro", "mensagem": "Credenciais inválidas"}), 401
+def configure_routes(app):
+    @app.route('/login', methods=['GET'])
+    def obter_usuario():
+        return jsonify(Usuarios)
