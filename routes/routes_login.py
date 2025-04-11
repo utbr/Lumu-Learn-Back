@@ -29,7 +29,6 @@ def configure_routes(app):
             login_user(user)
             return redirect(url_for('home'))
 
-# Novo endpoint de login para React
     @app.route('/api/login', methods=['POST'])
     def api_login():
         data = request.get_json()

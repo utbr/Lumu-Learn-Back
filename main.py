@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS  # importa o CORS
 from db import db
 from login import lm
-from routes import configure_routes
+from routes.routes_login import configure_routes
 
 app = Flask(__name__)
 app.secret_key = 'lancode'
