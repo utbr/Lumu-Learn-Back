@@ -39,8 +39,15 @@ def configure_routes(app):
         if not user:
             return jsonify({'success': False, 'message': 'Nome ou senha incorretos'}), 401
         
-        login_user(user)
-        return jsonify({'success': True, 'message': 'Login bem-sucedido'})
+        # Retorna os dados do usuário no formato correto
+        return jsonify({
+            'success': True,
+            'message': 'Login bem-sucedido',
+            'usuario': {
+                'id': user.id,
+                'nome': user.nome
+            }
+        })
 
 
 
@@ -62,3 +69,11 @@ def configure_routes(app):
     def logout():
         logout_user()
         return redirect(url_for('login'))
+
+
+
+    @app.route('/')
+    @login_required
+    def home():
+        print(current_user)
+        return render_template('home.html', username=current_user.nome)

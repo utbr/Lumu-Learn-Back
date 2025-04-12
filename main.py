@@ -8,8 +8,7 @@ app = Flask(__name__)
 app.secret_key = 'lancode'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 
-# ⚠️ Ativa o CORS com suporte a cookies/sessão
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, origins=["http://localhost:5173"])
 
 db.init_app(app)
 lm.init_app(app)
